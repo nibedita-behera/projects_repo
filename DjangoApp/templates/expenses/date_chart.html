@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-10">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="">Expenses Summary</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+           Summary
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-md-2">
+      <a href="" class="btn btn-primary">BACK</a>
+    </div>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.esm.js"></script>
+  </div>
+
+ <div class="row">
+    <div class="col-md-4">
+    </div>
+<div class="col-md-6">
+ <canvas id="myChart" width="400" height="400"></canvas>
+<script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const count=0
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels:[{% for data in data %}'{{data.date}}',{% endfor%}],
+        datasets: [{
+            label: 'Projects Cost Summary',
+            data: [{% for data in data %}'{{data.cost}}',{% endfor%}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+</div>
+
+
+ </div>
+</div>
+
+<!-- <script src="{% static 'js/stats.js' %}"></script> -->
+
+</script>
+
+{% endblock content %}
